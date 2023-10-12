@@ -6,15 +6,35 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Filters\Filterable;
+use Orchid\Filters\Types\Like;
 use Orchid\Screen\AsSource;
 
 class Service extends Model
 {
-    use HasFactory, HasUuids, AsSource;
+    use HasFactory, HasUuids, AsSource, Filterable;
 
     protected $fillable = [
         'name',
         'description',
+    ];
+
+    /**
+     * Name of columns to which http sorting can be applied
+     *
+     * @var array
+     */
+    protected $allowedSorts = [
+        'name',
+    ];
+
+    /**
+     * Name of columns to which http filtering can be applied
+     *
+     * @var array
+     */
+    protected $allowedFilters = [
+        'name' => Like::class,
     ];
 
     /**

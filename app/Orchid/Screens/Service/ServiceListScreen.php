@@ -19,7 +19,7 @@ class ServiceListScreen extends Screen
     public function query(): iterable
     {
         return [
-            'services' => Service::paginate()
+            'services' => Service::filters()->defaultSort('id')->paginate()
         ];
     }
 
