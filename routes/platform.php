@@ -5,6 +5,8 @@ declare(strict_types=1);
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\Service\ServiceEditScreen;
+use App\Orchid\Screens\Service\ServiceListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -58,7 +60,7 @@ Route::group(['prefix' => 'users'], function() {
             ->push($user->name, route('platform.systems.users.edit', $user)));
 });
 
-
+// Roles
 Route::group(['prefix' => 'roles'], function() {
     // Platform > System > Roles
     Route::screen('/', RoleListScreen::class)
@@ -82,6 +84,31 @@ Route::group(['prefix' => 'roles'], function() {
             ->push($role->name, route('platform.systems.roles.edit', $role)));
 });
 
+// Services
+Route::group(['prefix' => 'services'], function() {
+
+    // Platform > System > Services
+    Route::screen('/', ServiceListScreen::class)->name('platform.systems.services')
+        ->breadcrumbs(fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Services'), route('platform.systems.services')));
+
+
+    // Platform > System > Services > Service > Create
+    Route::screen('/create', ServiceEditScreen::class)
+        ->name('platform.systems.services.create')
+        ->breadcrumbs(fn (Trail $trail) => $trail
+            ->parent('platform.systems.services')
+            ->push(__('Create'), route('platform.systems.services.create')));
+
+    // Platform > System > Services > Service
+    Route::screen('/{service}/edit', ServiceEditScreen::class)
+        ->name('platform.systems.services.edit')
+        ->breadcrumbs(fn (Trail $trail, $service) => $trail
+            ->parent('platform.systems.services')
+            ->push($service->name, route('platform.systems.services.edit', $service)));
+
+});
 
 
 
