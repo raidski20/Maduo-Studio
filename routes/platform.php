@@ -5,6 +5,8 @@ declare(strict_types=1);
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\Section\SectionEditScreen;
+use App\Orchid\Screens\Section\SectionListScreen;
 use App\Orchid\Screens\Service\ServiceEditScreen;
 use App\Orchid\Screens\Service\ServiceListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -107,6 +109,24 @@ Route::group(['prefix' => 'services'], function() {
         ->breadcrumbs(fn (Trail $trail, $service) => $trail
             ->parent('platform.systems.services')
             ->push($service->name, route('platform.systems.services.edit', $service)));
+
+});
+
+// Sections
+Route::group(['prefix' => 'sections'], function() {
+
+    // Platform > System > Sections
+    Route::screen('/', SectionListScreen::class)->name('platform.systems.sections')
+        ->breadcrumbs(fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Sections'), route('platform.systems.sections')));
+
+    // Platform > System > Sections > Section
+    Route::screen('/{section}/edit', SectionEditScreen::class)
+        ->name('platform.systems.sections.edit')
+        ->breadcrumbs(fn (Trail $trail, $section) => $trail
+            ->parent('platform.systems.sections')
+            ->push($section->name, route('platform.systems.services.edit', $section)));;
 
 });
 

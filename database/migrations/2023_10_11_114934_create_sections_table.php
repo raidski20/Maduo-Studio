@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->json('data');
+            $table->string('name')->unique();
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->json('extra_data')->nullable();
             $table->timestamps();
         });
     }
