@@ -37,7 +37,8 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('My profile')
                 ->icon('person-lines-fill')
                 ->title('Personal')
-                ->route(config('platform.profile')),
+                ->route(config('platform.profile'))
+                ->divider(),
 
 
             Menu::make(__('Users'))
