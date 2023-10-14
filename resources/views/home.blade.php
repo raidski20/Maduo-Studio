@@ -78,77 +78,50 @@
 
         <div class="hero section-padding justify-content-center align-items-center d-flex flex-column">
             <h4 class="w-75 text-center font-weight-bold">
-                Lorem ipsum dolor sit amet. Qui aperiam nobis sed numquam optio aut assumenda vero.
+                {{ $sections['hero']->description }}
             </h4>
         </div>
 
         <div class="about-us section-padding bg-body-tertiary text-center"
              id="about-us"
         >
-            <h6 class="section-title">About Us</h6>
+            <h6 class="section-title">{{ $sections['about-us']->title }}</h6>
             <p class="mb-5">
-                Lorem ipsum dolor sit amet consectetur. Egestas praesent sagittis lectus libero ultricies enim aliquam. Quis ipsum nibh quis odio sit vel enim. Laoreet neque duis sem ut amet. Urna ullamcorper dignissim magnis nunc.
+                {{ $sections['about-us']->description }}
             </p>
 
             <h6 class="section-title-sm">Our Mission</h6>
             <p>
                 Lorem ipsum dolor sit amet consectetur. Egestas praesent sagittis lectus libero ultricies enim aliquam. Quis ipsum nibh quis odio sit vel enim. Laoreet neque duis sem ut amet. Urna ullamcorper dignissim magnis nunc.
             </p>
+
         </div>
 
         <div class="services section-padding"
              id="services"
         >
             <div class="intro text-center mb-5">
-                <h6 class="section-title mb-4">Want you to boost your business growth?
-                    Solution is here.
+                <h6 class="section-title mb-4">
+                    {{ $sections['services']->title }}
                 </h6>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur. Ultrices augue ut vitae velit sodales. Sapien lacus eu vulputate ac commodo nisl dictumst lacus.
+                    {{ $sections['services']->description }}
                 </p>
             </div>
 
             <div class="main-services d-flex flex-column align-items-center justify-content-center">
 
-                <div class="service d-flex flex-column align-items-center">
-                    <p class="service-number">01</p>
+                @foreach($services as $service)
+                    <div class="service d-flex flex-column align-items-center">
+                        <p class="service-number">{{ '0' . $loop->iteration }}</p>
 
-                    <h6 class="section-title-sm">Web Content</h6>
+                        <h6 class="section-title-sm">{{ $service->name }}</h6>
 
-                    <p class="service-detail">
-                        Lorem ipsum dolor sit amet consectetur. Sapien nisl lobortis odio semper tellus id sed vitae. At mauris dui nam nibh viverra. Lacus pulvinar fringilla amet auctor tortor eget venenatis. Libero id.
-                    </p>
-                </div>
-
-                <div class="service d-flex flex-column align-items-center">
-                    <p class="service-number">02</p>
-
-                    <h6 class="section-title-sm">Android Dev</h6>
-
-                    <p class="service-detail">
-                        Lorem ipsum dolor sit amet consectetur. Sapien nisl lobortis odio semper tellus id sed vitae. At mauris dui nam nibh viverra. Lacus pulvinar fringilla amet auctor tortor eget venenatis. Libero id.
-                    </p>
-                </div>
-
-                <div class="service d-flex flex-column align-items-center">
-                    <p class="service-number">03</p>
-
-                    <h6 class="section-title-sm">Branding</h6>
-
-                    <p class="service-detail">
-                        Lorem ipsum dolor sit amet consectetur. Sapien nisl lobortis odio semper tellus id sed vitae. At mauris dui nam nibh viverra. Lacus pulvinar fringilla amet auctor tortor eget venenatis. Libero id.
-                    </p>
-                </div>
-
-                <div class="service d-flex flex-column align-items-center">
-                    <p class="service-number">04</p>
-
-                    <h6 class="section-title-sm">Market Analysis</h6>
-
-                    <p class="service-detail">
-                        Lorem ipsum dolor sit amet consectetur. Sapien nisl lobortis odio semper tellus id sed vitae. At mauris dui nam nibh viverra. Lacus pulvinar fringilla amet auctor tortor eget venenatis. Libero id.
-                    </p>
-                </div>
+                        <p class="service-detail">
+                            {{ $service->description }}
+                        </p>
+                    </div>
+                @endforeach
             </div>
         </div>
 

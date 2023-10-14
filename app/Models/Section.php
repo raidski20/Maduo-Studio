@@ -30,6 +30,16 @@ class Section extends Model
     ];
 
     /**
+     * Name of columns which must be hidden
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
+    /**
      * Name of columns to which http sorting can be applied
      *
      * @var array
@@ -66,8 +76,8 @@ class Section extends Model
     public function extraData(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => json_decode($value, true),
-            set: fn(array $value) => json_encode($value)
+            get: fn(?string $value) => $value ? json_decode($value, true) : null,
+            set: fn(array $value) => $value ? json_encode($value) : null
         );
     }
 }

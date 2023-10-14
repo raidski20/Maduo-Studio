@@ -20,6 +20,16 @@ class Service extends Model
     ];
 
     /**
+     * Name of columns which must be hidden
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
+    /**
      * Name of columns to which http sorting can be applied
      *
      * @var array
