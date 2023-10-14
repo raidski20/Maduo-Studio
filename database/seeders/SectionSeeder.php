@@ -14,7 +14,7 @@ class SectionSeeder extends Seeder
      */
     public function run(): void
     {
-        $services = Service::limit(3)->pluck('id');
+        $services = Service::limit(4)->pluck('id');
 
         $sections = [
             [

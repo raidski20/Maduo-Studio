@@ -12,12 +12,12 @@
   <header>
     <div class="hero section-padding">
         <h6 class="hero-small-title">
-          BUSINESS intelligence agency
+          {{ $sections['hero']['title'] }}
         </h6>
 
         <div class="hero-intro text-center">
           <h6 class="hero-intro-text">
-            Crafting business-story with art
+              {{ $sections['hero']['description'] }}
           </h6>
 
           <a class="btn btn-contact-icon mt-5" href="{{ route('global.contact') }}">
@@ -34,37 +34,16 @@
   <div class="statistics section-padding overflow-hidden">
     <div class="row justify-content-center align-items-center">
 
-      <div class="col-sm-6 col-lg-3 stat">
-        <p class="stat-number">42+</p>
+        @foreach($sections['statistics']['extra_data']['entities'] as $statistic)
+            <div class="col-sm-6 col-lg-3 stat">
+                <p class="stat-number">{{ $statistic["number"] }}</p>
 
-        <div class="divider"></div>
+                <div class="divider"></div>
 
-        <p class="stat-title">Client</p>
-      </div>
+                <p class="stat-title">{{ $statistic['name'] }}</p>
+            </div>
+        @endforeach
 
-      <div class="col-sm-6 col-lg-3 stat">
-        <p class="stat-number">540</p>
-
-        <div class="divider"></div>
-
-        <p class="stat-title">Project</p>
-      </div>
-
-      <div class="col-sm-6 col-lg-3 stat">
-        <p class="stat-number">300</p>
-
-        <div class="divider"></div>
-
-        <p class="stat-title">Partner</p>
-      </div>
-
-      <div class="col-sm-6 col-lg-3 stat">
-        <p class="stat-number">25+</p>
-
-        <div class="divider"></div>
-
-        <p class="stat-title">Office</p>
-      </div>
     </div>
   </div>
 
@@ -74,20 +53,24 @@
     <div class="row justify-content-between">
 
     <div class="col-sm-5 heading">
-      <h6 class="section-title">About Us!</h6>
+      <h6 class="section-title">{{ $sections['about-us']['title'] }}</h6>
     </div>
     <div class="col-sm-7 details">
       <p>
-        Lorem ipsum dolor sit amet consectetur. Egestas praesent sagittis lectus libero ultricies enim aliquam. Quis ipsum nibh quis odio sit vel enim. Laoreet neque duis sem ut amet. Urna ullamcorper dignissim magnis nunc. Massa
+          {{ $sections['about-us']['description'] }}
       </p>
 
-      <h6 class="section-title-sm">
-        What We do?
-      </h6>
+        @if(!empty($sections['about-us']['extra_data']['title']))
+            <h6 class="section-title-sm">
+                {{ $sections['about-us']['extra_data']['title'] }}
+            </h6>
+        @endif
 
-      <p>
-        Lorem ipsum dolor sit amet consectetur. Pulvinar volutpat in dui sed cursus lacus nibh arcu odio. Pharetra penatibus imperdiet in elementum commodo a nisl non pharetra. Ultrices convallis quis felis faucibus lacinia aenean. Ac sed ipsum blandit aliquet urna cursus fusce etiam. Lacus eget neque fringilla mi. Et habitasse lectus id gravida lorem. Vulputate iaculis sagittis non sit in ullamcorper rhoncus nec adipiscing. Nam ornare ultricies morbi volutpat malesuada nisl. Vel mollis ultrices integer molestie vitae facilisi enim sit. Adipiscing quis auctor ac pellentesque blandit pellentesque nibh donec. Purus faucibus fermentum blandit massa.
-      </p>
+        @if(!empty($sections['about-us']['extra_data']['title']))
+            <p>
+                {{ $sections['about-us']['extra_data']['description'] }}
+            </p>
+        @endif
     </div>
     </div>
   </div>
@@ -98,8 +81,8 @@
     <div class="row justify-content-between">
 
       <div class="col-md-12 col-lg-5 heading">
-        <h6 class="section-title">Want you to boost your business growth? Solution is here.</h6>
-        <p>Lorem ipsum dolor sit amet consectetur. Ultrices augue ut vitae velit sodales. Sapien lacus eu vulputate ac commodo nisl dictumst lacus.</p>
+        <h6 class="section-title">{{ $sections['services']['title'] }}</h6>
+        <p>{{ $sections['services']['description'] }}</p>
 
         <a class="btn btn-white mb-5 mb-lg-0">See more</a>
       </div>
@@ -107,38 +90,15 @@
       <div class="col-md-12 col-lg-7 details">
         <div class="row g-0">
 
-          <div class="col-md-6 mb-4 mb-md-0 service">
-            <div class="position-relative  py-5 px-3">
-              <span class="service-count">01</span>
-              <h6>Android Dev</h6>
-              <p>Lorem ipsum dolor sit amet consectetur. Sapien nisl lobortis odio semper tellus id sed vitae. At mauris dui nam nibh viverra. Lacus pulvinar fringilla amet auctor tortor eget venenatis. Libero id.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 mb-4 mb-md-0 service">
-            <div class="position-relative py-5 px-3">
-              <span class="service-count">02</span>
-              <h6>Web Content</h6>
-              <p>Lorem ipsum dolor sit amet consectetur. Sapien nisl lobortis odio semper tellus id sed vitae. At mauris dui nam nibh viverra. Lacus pulvinar fringilla amet auctor tortor eget venenatis. Libero id.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 mb-4 mb-md-0 service">
-            <div class="position-relative py-5 px-3">
-              <span class="service-count">03</span>
-              <h6>Branding</h6>
-              <p>Lorem ipsum dolor sit amet consectetur. Sapien nisl lobortis odio semper tellus id sed vitae. At mauris dui nam nibh viverra. Lacus pulvinar fringilla amet auctor tortor eget venenatis. Libero id.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 service">
-            <div class="position-relative service py-5 px-3">
-              <span class="service-count">04</span>
-              <h6>Market Analysis</h6>
-              <p>Lorem ipsum dolor sit amet consectetur. Sapien nisl lobortis odio semper tellus id sed vitae. At mauris dui nam nibh viverra. Lacus pulvinar fringilla amet auctor tortor eget venenatis. Libero id.</p>
-            </div>
-          </div>
-
+            @foreach($services as $service)
+                <div class="col-md-6 mb-4 mb-md-0 service">
+                    <div class="h-100 position-relative py-5 px-3">
+                      <span class="service-count">{{ '0' . $loop->iteration }}</span>
+                      <h6>{{ $service->name }}</h6>
+                      <p>{{ $service->description }}</p>
+                    </div>
+                </div>
+            @endforeach
         </div>
       </div>
 
