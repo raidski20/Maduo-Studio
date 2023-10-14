@@ -99,7 +99,7 @@ return [
      |
      */
 
-    'index' => 'platform.main',
+    'index' => 'platform.profile',
 
     /*
      |--------------------------------------------------------------------------
@@ -221,7 +221,7 @@ return [
      */
 
     'notifications' => [
-        'enabled'  => true,
+        'enabled'  => false,
         'interval' => 60,
     ],
 
