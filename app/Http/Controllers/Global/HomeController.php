@@ -10,13 +10,13 @@ class HomeController extends Controller
 {
     public function home()
     {
-        $sectionNames = ['hero', 'statistics', 'about-us', 'services', 'contact-us'];
+        $sectionNames = ['hero', 'statistics', 'about-us', 'services'];
         $sections = Section::whereIn('name', $sectionNames)->get()->keyBy('name');
 
         // Fetch the services associated with the service IDs
         $services = Service::whereIn('id', $sections['services']['extra_data']['services'])
             ->get();
 
-        return view('home', compact('sections', 'services'));
+        return view('global.home', compact('sections', 'services'));
     }
 }
