@@ -17,6 +17,6 @@ class GlobalController extends Controller
         $services = Service::whereIn('id', $sections['services']['extra_data']['services'])
             ->get();
 
-        return view('welcome', compact('sections', 'services'));
+        return view('home', compact('sections', 'services'));
     }
 }
