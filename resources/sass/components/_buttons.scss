@@ -1,0 +1,61 @@
+.btn {
+  text-decoration: none;
+  border-radius: 30px;
+  transition: all ease-in .4s;
+
+  &-dark-2,
+  &-dark-3,
+  &-contact-icon {
+    color: #fff;
+  }
+
+  &-dark-2 {
+    background-color: $color-dark-2;
+  }
+
+  &-dark-3,
+  &-contact-icon {
+    background-color: $color-dark-3;
+  }
+
+  &-white {
+    background-color: #fff;
+    color: $color-dark-2;
+    border-color: $color-dark-2;
+
+    &:hover {
+      background-color: $color-dark-2;
+      color: #fff;
+    }
+  }
+
+  &-contact-icon {
+    padding: 25px 42px;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 26.811px;
+    border-radius: 60px;
+    text-transform: uppercase;
+
+    .icon-container {
+      text-align: center;
+      display: inline-block;
+      background-color: $color-yellow;
+      border-radius: 50%;
+      width: 27px;
+      height: 27px;
+
+      i {
+        transform: rotate(43deg);
+        color: $color-dark-3;
+      }
+    }
+
+    &:hover {
+      border-color: $color-dark-3;
+    }
+  }
+
+
+}
+

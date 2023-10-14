@@ -1,0 +1,30 @@
+.navbar {
+  padding: 40px 40px;
+
+  .nav-link {
+    color: $color-dark-2;
+    padding: 16px 32px;
+    transition: all ease-in .4s;
+    &:hover {
+      color: $color-orange;
+    }
+  }
+
+  .nav-item:nth-child(4) {
+    .btn-dark-2 {
+      padding: 16px 32px;
+      transition: all ease-in .4s;
+      &:hover {
+        background-color: #fff;
+        color: $color-dark-2;
+        border-color: $color-dark-2;
+      }
+    }
+  }
+  .navbar-copyright {
+      color: $color-dark-3;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 30px;
+  }
+}

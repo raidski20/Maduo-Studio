@@ -1,0 +1,117 @@
+footer {
+  background: $color-dark-2;
+  color: #FFFFFF;
+
+  .upper-footer {
+    span {
+      font-size: 45px;
+      font-weight: bold;
+      line-height: 100%;
+    }
+
+    .btn-dark {
+      border: 1px solid #fff;
+      padding: 36px 72px;
+      border-radius: 60px;
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 120%;
+      letter-spacing: 0.24px;
+
+      &:hover {
+        background: #fff;
+        color: $color-dark-2;
+      }
+    }
+  }
+
+  .bottom-footer {
+    img,
+    .email,
+    .bio {
+      margin-bottom: 20px
+    }
+
+    .bio,
+    .email,
+    .phone-number {
+      text-align: justify;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 180%;
+    }
+
+    .link {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      column-gap: 1.5rem !important;
+      row-gap: 1.5rem !important;
+      align-items: center;
+
+      .links {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  footer {
+    .bottom-footer {
+      .footer-links {
+        flex-direction: row;
+        justify-content: space-between;
+
+        .links {
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  footer {
+    .upper-footer {
+      span {
+        font-size: 30px;
+      }
+
+      .btn-dark {
+        padding: 25px 45px;
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  footer {
+    .upper-footer {
+      span {
+        font-size: 20px;
+      }
+
+      .btn-dark {
+        padding: 15px 25px;
+        font-size: 20px;
+      }
+    }
+
+    .bottom-footer {
+      .footer-links {
+        flex-direction: column;
+      }
+    }
+  }
+}

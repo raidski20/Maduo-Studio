@@ -1,0 +1,32 @@
+.statistics {
+  margin-top: 30px;
+  background-color: $color-dark-1;
+  color: #FFFFFF;
+
+  .stat {
+    &-number {
+      font-size: 50px;
+      font-weight: bold;
+      line-height: 72px;
+      margin-bottom: 10px;
+    }
+
+    .divider {
+      height: 1px;
+      width: auto;
+      background-color: #fff;
+    }
+
+    &-title {
+      margin-top: 7px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}
+
+@media screen and (width <= 575.98px) {
+  .stat {
+    text-align: center;
+  }
+}

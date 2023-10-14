@@ -1,0 +1,61 @@
+.hero {
+
+  &-small-title {
+    color: $color-dark-3;
+    font-size: 29px;
+    font-weight: 500;
+    line-height: 48px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &-intro {
+    &-text {
+      color: $color-dark-3;
+      font-family: Clash Display;
+      font-size: 110px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (width <= 800px) {
+  .hero {
+    &-intro {
+      &-text {
+        font-size: 70px;
+      }
+    }
+  }
+}
+
+@media screen and (width <= 430px) {
+  .hero {
+    &-intro {
+      &-text {
+        font-size: 50px;
+      }
+    }
+  }
+}
+
+@media screen and (width <= 300px) {
+  .hero {
+    &-small-title {
+      font-size: 20px;
+    }
+
+    &-intro {
+      &-text {
+        font-size: 25px;
+      }
+
+      .btn-contact-icon {
+        padding: 10px 20px;
+        font-size: 15px;
+      }
+    }
+  }
+}

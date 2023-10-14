@@ -1,0 +1,22 @@
+// Custom Bootstrap Variables
+@import "abstracts/variables";
+
+// Import Bootstrap functions, vars, mixins
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
+// Bootstrap main import
+@import 'bootstrap/scss/bootstrap';
+
+@import "components/buttons";
+@import "base/global";
+@import "layouts/navbar";
+@import "layouts/hero";
+@import "layouts/statistics";
+@import "layouts/about-us";
+@import "layouts/services";
+@import "layouts/recent-work";
+@import "layouts/testimonial";
+@import "layouts/footer";
+@import "layouts/contact-us";

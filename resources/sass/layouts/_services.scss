@@ -1,0 +1,85 @@
+@mixin common-border {
+  border: 1px solid $color-dark-1;
+}
+
+.services {
+  .heading {
+    .section-title {
+      color: $color-dark-1;
+      font-size: 48px;
+      font-weight: bold;
+      line-height: 150%;
+      letter-spacing: -0.96px;
+    }
+
+    p {
+      color: $color-dark-1;
+      text-align: justify;
+      font-family: Nunito Sans;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 32px;
+    }
+
+    .btn-white {
+      margin-top: 80px;
+      padding: 16px 32px;
+    }
+  }
+
+  .details {
+    .service {
+
+      @for $i from 1 through 4 {
+        &:nth-child(#{$i}) > div {
+          @include common-border;
+          @if $i == 1 {
+            border-bottom: none;
+          }
+          @if $i == 2 {
+            border-bottom: none;
+            border-left: none;
+          }
+          @if $i == 4 {
+            border-left: none;
+          }
+        }
+      }
+
+      .service-count {
+        padding: 4px 8px;
+        position: absolute;
+        left: 8px;
+        top: -19px;
+        background: #EBE2D9;
+      }
+    }
+  }
+}
+
+@media screen and (width <= 767.98px) {
+  .services {
+    .details {
+      .service {
+
+
+        @for $i from 1 through 4 {
+          &:nth-child(#{$i}) > div {
+            @include common-border;
+            @if $i == 1 {
+              border-bottom: 1px solid $color-dark-1;
+            }
+            @if $i == 2 {
+              border-bottom: 1px solid $color-dark-1;
+              border-left: 1px solid $color-dark-1;
+            }
+            @if $i == 4 {
+              border-left: 1px solid $color-dark-1;
+            }
+          }
+        }
+
+      }
+    }
+  }
+}
