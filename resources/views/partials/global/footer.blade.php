@@ -31,24 +31,23 @@
             </a>
 
             <p class="bio">We are a designer engaged in design that provides design and renovation services for your home or office.</p>
-            <a class="link" href="mailto:maduostudio@gmail.com">maduostudio@gmail.com</a>
-            <p class="phone-number">(213) 558-66-95-67</p>
+            <a class="link" href="{{ $contact_us['extra_data']['email'] }}">{{ $contact_us['extra_data']['email'] }}</a>
+            <p class="phone-number">{{ $contact_us['extra_data']['phone'] }}</p>
         </div>
 
         <div class="col-12 col-sm-7 col-md-5 footer-links">
 
             <div class="links">
                 <a href="{{ route('home') }}" class="link">Home</a>
-                <a href="/public#about-us" class="link">About</a>
-                <a href="/public#services" class="link">Service</a>
+                <a href="/#about-us" class="link">About</a>
+                <a href="/#services" class="link">Service</a>
                 <a href="{{ route('global.contact') }}" class="link">Contact</a>
             </div>
 
             <div class="links">
-                <a href="#" class="link">LinkedIn</a>
-                <a href="#" class="link">Facebook</a>
-                <a href="#" class="link">Twitter</a>
-                <a href="#" class="link">Instagram</a>
+                @foreach($contact_us['extra_data']['socials'] as $social)
+                    <a href="{{ $social['link'] }}" class="link text-capitalize">{{ $social['name'] }}</a>
+                @endforeach
             </div>
         </div>
     </div>
