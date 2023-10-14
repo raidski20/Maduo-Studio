@@ -13,9 +13,9 @@
 
             <div class="col-12 col-md-5 info-section d-flex flex-column align-items-center align-items-md-start">
 
-                <h6 class="section-title">let's talk</h6>
+                <h6 class="section-title">{{ $contact_us['title'] }}</h6>
                 <p>
-                    Have some big idea or brand to develop and need help? Then reach out, we'd love to hear about your project and provide help.
+                    {{ $contact_us['description'] }}
                 </p>
 
                 <div class="w-100 d-flex flex-column
@@ -26,9 +26,9 @@
                         <h6>Email</h6>
 
                         <a class="link text-decoration-none"
-                           href="mailto:maduostudio@gmail.com"
+                           href="{{ $contact_us['extra_data']['email'] }}"
                         >
-                            maduostudio@gmail.com
+                            {{ $contact_us['extra_data']['email'] }}
                         </a>
                     </div>
 
@@ -36,23 +36,9 @@
                         <h6>Socials</h6>
 
                         <div class="d-flex flex-wrap flex-column flex-sm-row flex-md-column gap-3">
-                            <a class="link text-decoration-underline"
-                               href="#"
-                            >
-                                Instagram
-                            </a>
-
-                            <a class="link text-decoration-underline"
-                               href="#"
-                            >
-                                Twitter
-                            </a>
-
-                            <a class="link text-decoration-underline"
-                               href="#"
-                            >
-                                Facebook
-                            </a>
+                            @foreach($contact_us['extra_data']['socials'] as $social)
+                                <a href="{{ $social['link'] }}" class="link text-capitalize text-decoration-underline">{{ $social['name'] }}</a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
