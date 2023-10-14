@@ -20,7 +20,7 @@
             Crafting business-story with art
           </h6>
 
-          <a class="btn btn-contact-icon mt-5" href="/templates/contact.html">
+          <a class="btn btn-contact-icon mt-5" href="{{ route('global.contact') }}">
             Lets Talk
             <div class="icon-container ms-2" >
               <i class="fa-solid fa-arrow-up"></i>

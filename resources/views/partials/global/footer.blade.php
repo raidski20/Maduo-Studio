@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-sm-12 col-md-4">
-            <a href="/templates/contact.html" class="btn btn-dark">Let's Talk</a>
+            <a href="{{ route('global.contact') }}" class="btn btn-dark">Let's Talk</a>
         </div>
 
     </div>
@@ -26,7 +26,10 @@
 
     <div class="bottom-footer row justify-content-center justify-content-md-between align-items-center gap-2">
         <div class="col-12 col-sm-7 col-md-5">
-            <img src="{{ asset('assets/images/maduo-transparent-logo.svg') }}">
+            <a href="{{ route('home') }}">
+                <img src="{{ asset('assets/images/maduo-transparent-logo.svg') }}">
+            </a>
+
             <p class="bio">We are a designer engaged in design that provides design and renovation services for your home or office.</p>
             <a class="link" href="mailto:maduostudio@gmail.com">maduostudio@gmail.com</a>
             <p class="phone-number">(213) 558-66-95-67</p>
@@ -35,10 +38,10 @@
         <div class="col-12 col-sm-7 col-md-5 footer-links">
 
             <div class="links">
-                <a href="/public" class="link">Home</a>
+                <a href="{{ route('home') }}" class="link">Home</a>
                 <a href="/public#about-us" class="link">About</a>
                 <a href="/public#services" class="link">Service</a>
-                <a href="/templates/contact.html" class="link">Contact</a>
+                <a href="{{ route('global.contact') }}" class="link">Contact</a>
             </div>
 
             <div class="links">

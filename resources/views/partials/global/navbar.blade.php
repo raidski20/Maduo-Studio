@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md">
     <div class="container gap-0 column-gap-lg-5 flex-wrap">
 
-        <a class="navbar-brand" style="" href="/public">
+        <a class="navbar-brand" style="" href="{{ route('home') }}">
             <img src="{{ asset('assets/images/maduo-logo.svg') }}">
         </a>
 
@@ -28,7 +28,7 @@
 
                 <li class="nav-item">
                     <a class="btn btn-dark-2"
-                       href="/templates/contact.html"
+                       href="{{ route('global.contact') }}"
                     >
                         contact us</a>
                 </li>
