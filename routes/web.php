@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\GlobalController;
+use App\Http\Controllers\Global\ContactController;
+use App\Http\Controllers\Global\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [GlobalController::class, 'home']);
+Route::get('/', [HomeController::class, 'home'])->name('home');
+
+Route::get('/contact', [ContactController::class, 'contact'])->name('global.contact');

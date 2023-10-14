@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Global;
 
+use App\Http\Controllers\Controller;
 use App\Models\Section;
 use App\Models\Service;
-use Illuminate\Http\Request;
 
-class GlobalController extends Controller
+class HomeController extends Controller
 {
     public function home()
     {
