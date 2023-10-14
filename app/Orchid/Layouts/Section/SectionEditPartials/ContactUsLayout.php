@@ -24,18 +24,20 @@ class ContactUsLayout extends Rows
     protected function fields(): iterable
     {
         return [
+            Input::make('section.extra_data.email')
+                ->type('email')
+                ->title('Email'),
+
+            Input::make('section.extra_data.phone')
+                ->type('tel')
+                ->placeholder('Ex: (213) 558-66-95-67')
+                ->title('Phone number'),
+
             Matrix::make('section.extra_data.socials')
                 ->columns([
                     'Social media' => 'name',
                     'Link' => 'link'
                 ]),
-
-            Matrix::make('section.extra_data.other')
-                ->columns([
-                    'Info' => 'name',
-                    'Value' => 'value'
-                ])
-                ->maxRows(2),
         ];
     }
 }

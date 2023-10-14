@@ -57,6 +57,8 @@ class SectionSeeder extends Seeder
                 'title' => 'Lets Talk',
                 'description' => 'Have some big idea or brand to develop and need help? Then reach out, we\'d love to hear about your project and provide help.',
                 'extra_data' => [
+                    'email' => 'maduostudio@gmail.com',
+                    'phone' => '+213 558669567',
                     'socials' => [
                         [
                             'name' => 'twitter',
@@ -67,16 +69,6 @@ class SectionSeeder extends Seeder
                             'link' => 'https://www.facebook.com/maduostudio'
                         ]
                     ],
-                    'other' => [
-                        [
-                            'name' => 'email',
-                            'value' => 'maduostudio@gmail.com'
-                        ],
-                        [
-                            'name' => 'phone',
-                            'value' => '+213(0) 558-66-95-67'
-                        ]
-                    ]
                 ]
             ],
         ];
