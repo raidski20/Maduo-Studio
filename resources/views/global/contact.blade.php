@@ -45,10 +45,21 @@
             </div>
 
             <div class="col-12 col-md-6 form-section d-flex flex-column">
-                <form action="#">
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <form action="{{ route("global.contact.send") }}" method="POST">
                     @csrf
 
-                    <x-forms.input :label="'name'"
+                    <x-forms.input :label="'full name'"
                                    :field="'sender_name'"
                                    :type="'text'"
                                    :required="true"

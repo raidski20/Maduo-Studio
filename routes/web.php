@@ -17,4 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
-Route::get('/contact', [ContactController::class, 'contact'])->name('global.contact');
+Route::group(['prefix' => 'contact', 'controller' => ContactController::class], function () {
+    Route::get('/', 'contact')->name('global.contact');
+    Route::post('/', 'sendMail')->name('global.contact.send');
+});
+
