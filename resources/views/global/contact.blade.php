@@ -46,40 +46,24 @@
 
             <div class="col-12 col-md-6 form-section d-flex flex-column">
                 <form action="#">
-                    <div>
-                        <label for="inputName" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="inputName">
-                    </div>
+                    @csrf
 
-                    <div>
-                        <label for="inputEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="inputEmail">
-                    </div>
+                    <x-forms.input :label="'name'"
+                                   :field="'sender_name'"
+                                   :type="'text'"
+                                   :required="true"
+                    ></x-forms.input>
 
-                    <div>
-                        <label for="inputService" class="form-label">What service you are interested in?</label>
-                        <select class="form-select" id="inputService">
-                            <option selected>Select project type</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                    </div>
+                    <x-forms.input :label="'email'"
+                                   :field="'sender_email'"
+                                   :type="'email'"
+                                   :required="true"
+                    ></x-forms.input>
 
-                    <div>
-                        <label for="inputBudget" class="form-label">Budget</label>
-                        <select class="form-select" id="inputBudget">
-                            <option selected>Select project budget</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label for="inputMessage" class="form-label">Message</label>
-                        <textarea class="form-control" id="inputMessage" rows="5"></textarea>
-                    </div>
+                    <x-forms.textarea :label="'message'"
+                                      :field="'message'"
+                                      :required="true"
+                    ></x-forms.textarea>
 
                     <button type="submit">Send</button>
                 </form>
