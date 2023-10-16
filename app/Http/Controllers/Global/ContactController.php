@@ -21,6 +21,8 @@ class ContactController extends Controller
 
         Mail::to($contactSectionData->extra_data['email'])->send(new ContactUs($request->validated()));
 
-        dd('email sent');
+        toast('Your message has been sent!','success');
+
+        return redirect()->route('global.contact');
     }
 }

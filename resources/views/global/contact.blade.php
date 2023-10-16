@@ -8,6 +8,9 @@
 @endsection
 
 @section('content')
+
+    @include('sweetalert::alert')
+
     <div class="contact-us section-padding overflow-hidden">
         <div class="row justify-content-center align-items-center gy-5">
 
