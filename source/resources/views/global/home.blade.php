@@ -1,7 +1,7 @@
 @extends('layouts.global')
 
 @section('page_title')
-    <title>Maduo Studio</title>
+    <title>Home | Maduo Studio</title>
 @endsection
 
 @section('css')
