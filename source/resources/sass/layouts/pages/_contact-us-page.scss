@@ -3,20 +3,6 @@
   .heading-section {
     gap: 20px;
 
-    .section-title {
-      color: $black;
-      font-weight: bold;
-      text-transform: capitalize;
-
-      & + p {
-        color: $black;
-        text-align: justify;
-        font-size: 20px;
-        font-weight: 400;
-        line-height: normal;
-      }
-    }
-
     .contact-info {
       display: flex;
       flex-direction: column;

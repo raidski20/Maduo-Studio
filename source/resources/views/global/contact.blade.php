@@ -11,7 +11,7 @@
 
     @include('sweetalert::alert')
 
-    <div class="contact-us-page section-padding overflow-hidden">
+    <div class="contact-us-page common-page section-padding overflow-hidden">
         <div class="row justify-content-center align-items-center gy-5">
 
             <div class="col-12 col-md-5 heading-section d-flex flex-column align-items-center align-items-md-start">
