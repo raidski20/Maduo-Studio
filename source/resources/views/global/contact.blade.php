@@ -11,10 +11,10 @@
 
     @include('sweetalert::alert')
 
-    <div class="contact-us section-padding overflow-hidden">
+    <div class="contact-us-page section-padding overflow-hidden">
         <div class="row justify-content-center align-items-center gy-5">
 
-            <div class="col-12 col-md-5 info-section d-flex flex-column align-items-center align-items-md-start">
+            <div class="col-12 col-md-5 heading-section d-flex flex-column align-items-center align-items-md-start">
 
                 <h6 class="section-title">{{ $contact_us['title'] }}</h6>
                 <p>
