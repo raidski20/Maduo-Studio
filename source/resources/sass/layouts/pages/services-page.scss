@@ -1,0 +1,14 @@
+.services-page {
+    .card {
+        border-color: $color-dark-3 !important;
+
+        .card-title {
+            color: #000;
+        }
+        .btn-contact-icon {
+            border-color: #fff;
+            padding: 10px;
+            font-size: 17px;
+        }
+    }
+}

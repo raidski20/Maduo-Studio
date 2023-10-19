@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Global\ContactController;
 use App\Http\Controllers\Global\HomeController;
+use App\Http\Controllers\Global\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,6 @@ Route::group(['prefix' => 'contact', 'controller' => ContactController::class], 
     Route::get('/', 'contact')->name('global.contact');
     Route::post('/', 'sendMail')->name('global.contact.send');
 });
+
+Route::get('/services', [ServiceController::class, 'renderServicesPage'])->name('global.services');
 

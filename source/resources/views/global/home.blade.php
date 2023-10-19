@@ -84,7 +84,7 @@
         <h6 class="section-title">{{ $sections['services']['title'] }}</h6>
         <p>{{ $sections['services']['description'] }}</p>
 
-        <a class="btn btn-white mb-5 mb-lg-0">See more</a>
+        <a href="{{ route("global.services") }}" class="btn btn-white mb-5 mb-lg-0">See more</a>
       </div>
 
       <div class="col-md-12 col-lg-7 details">
