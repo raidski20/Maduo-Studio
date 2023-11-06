@@ -1,0 +1,25 @@
+.work-page {
+    .heading-section {
+        margin: 0 0 70px 0;
+    }
+
+    .works-section .work .info {
+        padding: 0 80px;
+    }
+
+    .link {
+        color: $color-orange;
+    }
+}
+
+@media (width <= 768px) {
+    .works-section .work .info {
+        padding: 0 40px !important;
+    }
+}
+
+@media (width <= 576px) {
+    .works-section .work .info {
+        padding: 0 !important;
+    }
+}

@@ -24,4 +24,7 @@ Route::group(['prefix' => 'contact', 'controller' => ContactController::class], 
 });
 
 Route::get('/services', [ServiceController::class, 'renderServicesPage'])->name('global.services');
+Route::get('/work', function () {
+    return view("global.work");
+})->name('global.work');
 
