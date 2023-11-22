@@ -26,4 +26,20 @@ enum WorkType: string
     {
         return array_column(self::cases(), 'value');
     }
+
+    /**
+     * Return an associative array of cases values and their labels.
+     * For ex: [ android_app => Android Application]
+     * @return array
+     */
+    public static function getCasesAssoc(): array
+    {
+        $results = [];
+
+        array_map(function (self $type) use (&$results){
+            return $results[$type->value] = $type->label();
+        }, self::cases());
+
+        return $results;
+    }
 }
