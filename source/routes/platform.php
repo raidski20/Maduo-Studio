@@ -12,6 +12,7 @@ use App\Orchid\Screens\Service\ServiceListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
+use App\Orchid\Screens\Work\WorkListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -128,4 +129,14 @@ Route::group(['prefix' => 'sections'], function() {
             ->parent('platform.systems.sections')
             ->push($section->name, route('platform.systems.services.edit', $section)));;
 
+});
+
+// Sections
+Route::group(['prefix' => 'work'], function() {
+
+    // Platform > System > Works
+    Route::screen('/', WorkListScreen::class)->name('platform.systems.works')
+        ->breadcrumbs(fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Works'), route('platform.systems.works')));
 });

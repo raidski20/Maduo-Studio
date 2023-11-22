@@ -55,6 +55,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('bs.collection')
                 ->route('platform.systems.sections'),
 
+            Menu::make(__('Works'))
+                ->icon('bs.ui-checks')
+                ->route('platform.systems.works'),
+
             Menu::make(__('Roles'))
                 ->icon('bs.shield')
                 ->route('platform.systems.roles')
