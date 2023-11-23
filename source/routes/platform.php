@@ -12,6 +12,7 @@ use App\Orchid\Screens\Service\ServiceListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
+use App\Orchid\Screens\Work\WorkEditScreen;
 use App\Orchid\Screens\Work\WorkListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
@@ -139,4 +140,11 @@ Route::group(['prefix' => 'work'], function() {
         ->breadcrumbs(fn (Trail $trail) => $trail
             ->parent('platform.index')
             ->push(__('Works'), route('platform.systems.works')));
+
+    // Platform > System > Works > Create
+    Route::screen('/create', WorkEditScreen::class)
+        ->name('platform.systems.works.create')
+        ->breadcrumbs(fn (Trail $trail) => $trail
+            ->parent('platform.systems.works')
+            ->push(__('Create'), route('platform.systems.works.create')));
 });
