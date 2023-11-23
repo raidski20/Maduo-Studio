@@ -7,6 +7,7 @@ use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
+use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Layouts\Rows;
 
 class WorkEditLayout extends Rows
@@ -35,15 +36,11 @@ class WorkEditLayout extends Rows
 
             Select::make('work.type')
                 ->title('Work type')
-
-                ->options()
-
                 ->options(
                     ($workType = request()['type'])
                         ?  [$workType => WorkType::tryFrom($workType)->label()]
                         : WorkType::getCasesAssoc()
-                )
-                ->disabled(),
+                ),
 
 
             Input::make('work.link')
@@ -51,7 +48,12 @@ class WorkEditLayout extends Rows
                 ->title(__('Work link'))
                 ->placeholder('Ex: https://example.com')
                 ->help('Provide a link -if available- of the work.')
-                ->maxlength(250)
+                ->maxlength(250),
+
+            Upload::make('attachments')
+                ->acceptedFiles('image/*')
+                ->path("images/work-samples")
+                ->multiple(false),
         ];
     }
 }

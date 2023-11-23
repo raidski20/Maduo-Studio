@@ -7,8 +7,11 @@ use App\Models\Work;
 use App\Orchid\Layouts\Work\WorkEditLayout;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Orchid\Attachment\Models\Attachment;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
+use Intervention\Image\ImageManagerStatic as Image;
 use Orchid\Support\Facades\Toast;
 
 class WorkEditScreen extends Screen
@@ -94,8 +97,35 @@ class WorkEditScreen extends Screen
 
         $this->work = Work::create($newWorkData);
 
+        if(! empty($request->attachments))
+        {
+            $this->resizeImage($request->attachments);
+            $this->work->attachment()->syncWithoutDetaching(
+                $request->input('attachments', [])
+            );
+        }
+
         Toast::success(__('Work was added'));
 
         return to_route("platform.systems.works");
     }
+
+    private function resizeImage(array $attachmentsIds): void
+    {
+        foreach ($attachmentsIds as $id)
+        {
+            $attachment = Attachment::
+            select(['id', 'name', 'extension', 'path', 'disk'])
+                ->findOrFail($id);
+
+            $attachmentFullPath = Storage::disk($attachment->disk)
+                ->path($attachment->path . '/' . $attachment->name . '.' . $attachment->extension);
+
+            $image_resize = Image::make($attachmentFullPath);
+
+            $image_resize->fit(1100, 619);
+            $image_resize->save($attachmentFullPath);
+        }
+    }
+
 }
