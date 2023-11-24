@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('works', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->string('url')->nullable();
             $table->enum('type', \App\Enums\WorkType::getCasesValues());
             $table->timestamps();

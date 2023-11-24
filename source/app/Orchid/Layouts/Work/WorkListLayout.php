@@ -4,6 +4,8 @@ namespace App\Orchid\Layouts\Work;
 
 use App\Enums\WorkType;
 use App\Models\Work;
+use Orchid\Screen\Actions\DropDown;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
@@ -46,6 +48,17 @@ class WorkListLayout extends Table
                 ->render(function (Work $work) {
                     return WorkType::tryFrom($work->type)->label();
                 }),
+
+            TD::make(__('Actions'))
+                ->align(TD::ALIGN_CENTER)
+                ->render(fn (Work $work) => DropDown::make()
+                    ->icon('bs.three-dots-vertical')
+                    ->list([
+
+                        Link::make(__('Edit'))
+                            ->route('platform.systems.works.edit', $work->id)
+                            ->icon('bs.pencil'),
+                    ])),
         ];
     }
 }
