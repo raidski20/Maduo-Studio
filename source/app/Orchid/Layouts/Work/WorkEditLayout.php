@@ -53,7 +53,15 @@ class WorkEditLayout extends Rows
             Upload::make('work.attachment')
                 ->acceptedFiles('image/*')
                 ->path("images/work-samples")
-                ->multiple(false),
+                ->multiple(false)
+                ->help(
+                    '<p class="text-danger">
+                        The recommended dimensions for a mobile app screenshot are 576x713,
+                        and 1100x619 for a website.
+                        Deviating from these recommended dimensions,
+                        either by going too small or too large, results in a poor display.
+                    </p>'
+                )
         ];
     }
 }
