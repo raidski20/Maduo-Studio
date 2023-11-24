@@ -50,7 +50,7 @@ class WorkEditLayout extends Rows
                 ->help('Provide a link -if available- of the work.')
                 ->maxlength(250),
 
-            Upload::make('attachments')
+            Upload::make('work.attachment')
                 ->acceptedFiles('image/*')
                 ->path("images/work-samples")
                 ->multiple(false),

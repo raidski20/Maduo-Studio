@@ -95,13 +95,15 @@ class WorkEditScreen extends Screen
     {
         $newWorkData = $request->get('work');
 
-        $this->work = Work::create($newWorkData);
+        unset($newWorkData['attachment']);
 
-        if(! empty($request->attachments))
+        $this->work->fill($newWorkData)->save();
+
+        if(! empty($request['work']['attachment']))
         {
-            $this->resizeImage($request->attachments);
+            $this->resizeImage($request['work']['attachment']);
             $this->work->attachment()->syncWithoutDetaching(
-                $request->input('attachments', [])
+                $request->input('work.attachment', [])
             );
         }
 
