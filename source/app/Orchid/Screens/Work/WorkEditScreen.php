@@ -96,19 +96,13 @@ class WorkEditScreen extends Screen
 
     public function create(Request $request): RedirectResponse
     {
-        $newWorkData = $request->get('work');
+        [$newWorkData, $attachmentsIds] = $this->extractWorkInfoFromRequest($request);
 
-        unset($newWorkData['attachment']);
+        $this->saveWork($newWorkData);
 
-        $this->work->fill($newWorkData)->save();
+        $this->work->attachment()->syncWithoutDetaching($attachmentsIds);
 
-        if(! empty($request['work']['attachment']))
-        {
-            $this->resizeImage($request['work']['attachment']);
-            $this->work->attachment()->syncWithoutDetaching(
-                $request->input('work.attachment', [])
-            );
-        }
+        $this->resizeImage($attachmentsIds);
 
         Toast::success(__('Work was added'));
 
@@ -117,18 +111,15 @@ class WorkEditScreen extends Screen
 
     public function update(Request $request): RedirectResponse
     {
-        $newWorkData = $request->get('work');
+        [$newWorkData, $attachmentsIds] = $this->extractWorkInfoFromRequest($request);
 
-        unset($newWorkData['attachment']);
+        $this->saveWork($newWorkData);
 
-        $this->work->fill($newWorkData)->save();
-
-        if(! empty($request['work']['attachment']))
+        if($this->checkIfAttachmentsChanged($attachmentsIds))
         {
-            $this->resizeImage($request['work']['attachment']);
-            $this->work->attachment()->syncWithoutDetaching(
-                $request->input('work.attachment', [])
-            );
+            $this->work->attachment()->syncWithoutDetaching($attachmentsIds);
+
+            $this->resizeImage($attachmentsIds);
         }
 
         Toast::success(__('Work was updated'));
@@ -136,6 +127,27 @@ class WorkEditScreen extends Screen
         return to_route("platform.systems.works");
     }
 
+    private function extractWorkInfoFromRequest(Request $request): array
+    {
+        $newWorkData = $request->get('work');
+
+        unset($newWorkData['attachment']);
+
+        return [
+            $newWorkData,
+            $request->input('work.attachment')
+        ];
+    }
+
+    private function saveWork(array $data): void
+    {
+        $this->work->fill($data)->save();
+    }
+
+    private function checkIfAttachmentsChanged(array $attachmentsIds): bool
+    {
+        return $attachmentsIds != $this->work->attachment->pluck('id')->toArray();
+    }
     private function resizeImage(array $attachmentsIds): void
     {
         foreach ($attachmentsIds as $id)
@@ -153,5 +165,4 @@ class WorkEditScreen extends Screen
             $image_resize->save($attachmentFullPath);
         }
     }
-
 }
