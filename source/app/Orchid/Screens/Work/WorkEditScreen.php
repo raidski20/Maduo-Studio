@@ -36,6 +36,8 @@ class WorkEditScreen extends Screen
             }
         }
 
+        $work->load('attachment');
+
         return [
             'work' => $work
         ];
@@ -70,7 +72,8 @@ class WorkEditScreen extends Screen
         return [
             Button::make(__('Save changes'))
                 ->icon('bs.check-circle')
-                ->canSee($this->work->exists),
+                ->canSee($this->work->exists)
+                ->method('update'),
 
             Button::make(__('Create work'))
                 ->icon('bs.plus-circle')
@@ -108,6 +111,27 @@ class WorkEditScreen extends Screen
         }
 
         Toast::success(__('Work was added'));
+
+        return to_route("platform.systems.works");
+    }
+
+    public function update(Request $request): RedirectResponse
+    {
+        $newWorkData = $request->get('work');
+
+        unset($newWorkData['attachment']);
+
+        $this->work->fill($newWorkData)->save();
+
+        if(! empty($request['work']['attachment']))
+        {
+            $this->resizeImage($request['work']['attachment']);
+            $this->work->attachment()->syncWithoutDetaching(
+                $request->input('work.attachment', [])
+            );
+        }
+
+        Toast::success(__('Work was updated'));
 
         return to_route("platform.systems.works");
     }

@@ -147,4 +147,14 @@ Route::group(['prefix' => 'work'], function() {
         ->breadcrumbs(fn (Trail $trail) => $trail
             ->parent('platform.systems.works')
             ->push(__('Create'), route('platform.systems.works.create')));
+
+    // Platform > System > Works > Work
+    Route::screen('/{work}/edit', WorkEditScreen::class)
+        ->name('platform.systems.works.edit')
+        ->breadcrumbs(fn (Trail $trail, $work) => $trail
+            ->parent('platform.systems.works')
+            ->push(
+                substr($work->title, 0, 40). ' ...',
+                route('platform.systems.works.edit', $work)
+            ));
 });

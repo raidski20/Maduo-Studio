@@ -95,5 +95,7 @@ class WorkListScreen extends Screen
 
         $addNewWorkLink = route('platform.systems.works.create') . '?type=' . $validated['type'];
         return redirect()->to($addNewWorkLink);
+        /*$t = $request['work']['attachment'];
+        $this->work->attachment->pluck('id')->toArray());*/
     }
 }
