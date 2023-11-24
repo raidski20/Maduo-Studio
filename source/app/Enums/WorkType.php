@@ -2,6 +2,9 @@
 
 namespace App\Enums;
 
+/**
+ * Work types and the required image dimensions for each type
+ */
 enum WorkType: string
 {
     case ANDROID_APP = 'android_app';
@@ -41,5 +44,24 @@ enum WorkType: string
         }, self::cases());
 
         return $results;
+    }
+
+    public function imageDimensions(): array
+    {
+        return self::getImageDimensions($this);
+    }
+
+    public function getImageDimensions(self $value): array
+    {
+        return match ($value) {
+            self::ANDROID_APP => [
+                'width' => 576,
+                'height' => 713
+            ],
+            self::WEBSITE, self::THREE_D_DESIGN => [
+                'width' => 1100,
+                'height' => 619
+            ]
+        };
     }
 }
