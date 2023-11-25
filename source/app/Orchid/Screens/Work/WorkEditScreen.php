@@ -3,11 +3,11 @@
 namespace App\Orchid\Screens\Work;
 
 use App\Enums\WorkType;
+use App\Http\Requests\WorkRequest;
 use App\Models\Work;
 use App\Orchid\Layouts\Work\WorkEditLayout;
 use App\Services\WorkService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
@@ -96,18 +96,22 @@ class WorkEditScreen extends Screen
         ];
     }
 
-    public function create(Request $request): RedirectResponse
+    public function create(WorkRequest $request): RedirectResponse
     {
-       $this->work = $this->workService->createNewWork($request);
+        $validated = $request->validated();
+
+       $this->work = $this->workService->createNewWork($validated);
 
         Toast::success(__('Work was added'));
 
         return to_route("platform.systems.works");
     }
 
-    public function update(Request $request): RedirectResponse
+    public function update(WorkRequest $request): RedirectResponse
     {
-        $this->work = $this->workService->updateWork($request, $this->work);
+        $validated = $request->validated();
+
+        $this->work = $this->workService->updateWork($validated, $this->work);
 
         Toast::success(__('Work was updated'));
 

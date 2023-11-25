@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Events\WorkAttachmentsChanged;
 use App\Models\Work;
-use Illuminate\Http\Request;
 
 class WorkService
 {
@@ -12,9 +11,9 @@ class WorkService
         private Work $work
     ){}
 
-    public function createNewWork(Request $request): Work
+    public function createNewWork(array $validatedData): Work
     {
-        [$newWorkData, $attachmentsIds] = $this->extractWorkInfoFromRequest($request);
+        [$newWorkData, $attachmentsIds] = $this->extractWorkInfoFromRequest($validatedData);
 
         $this->saveWork($newWorkData);
 
@@ -25,11 +24,11 @@ class WorkService
         return $this->work;
     }
 
-    public function updateWork(Request $request, Work $work): Work
+    public function updateWork(array $validatedData, Work $work): Work
     {
         $this->work = $work;
 
-        [$newWorkData, $attachmentsIds] = $this->extractWorkInfoFromRequest($request);
+        [$newWorkData, $attachmentsIds] = $this->extractWorkInfoFromRequest($validatedData);
 
         $this->saveWork($newWorkData);
 
@@ -43,15 +42,15 @@ class WorkService
         return $this->work;
     }
 
-    private function extractWorkInfoFromRequest(Request $request): array
+    private function extractWorkInfoFromRequest(array $validatedData): array
     {
-        $newWorkData = $request->get('work');
+        $newWorkData = $validatedData['work'];
 
         unset($newWorkData['attachment']);
 
         return [
             $newWorkData,
-            $request->input('work.attachment')
+            $validatedData['work']['attachment']
         ];
     }
 

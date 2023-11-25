@@ -43,9 +43,9 @@ class WorkEditLayout extends Rows
                 ),
 
 
-            Input::make('work.link')
-                ->type('text')
-                ->title(__('Work link'))
+            Input::make('work.url')
+                ->type('url')
+                ->title(__('Work url'))
                 ->placeholder('Ex: https://example.com')
                 ->help('Provide a link -if available- of the work.')
                 ->maxlength(250),
@@ -55,12 +55,13 @@ class WorkEditLayout extends Rows
                 ->path("images/work-samples")
                 ->multiple(false)
                 ->help(
-                    '<p class="text-danger">
-                        The recommended dimensions for a mobile app screenshot are 576x713,
-                        and 1100x619 for a website.
-                        Deviating from these recommended dimensions,
-                        either by going too small or too large, results in a poor display.
-                    </p>'
+                    '<ul class="text-primary">
+                        <li>The recommended dimensions for a mobile app screenshot are 576x713,
+                        and 1100x619 for a website.</li>
+
+                        <li>Deviating from these recommended dimensions,
+                        either by going too small or too large, results in a poor display.</li>
+                    </ul>'
                 )
         ];
     }
