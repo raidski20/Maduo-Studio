@@ -4,7 +4,16 @@
 // Import Bootstrap functions, vars, mixins
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/mixins';
+
+// Importing variables-dark because it's required inside the maps
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+
+// Custom Bootstrap Utilities
+@import "bootstrap/scss/utilities";
+@import "abstracts/utilities";
+@import "bootstrap/scss/utilities/api";
 
 // Bootstrap main import
 @import 'bootstrap/scss/bootstrap';
