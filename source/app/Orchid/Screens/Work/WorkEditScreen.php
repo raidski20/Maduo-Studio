@@ -3,9 +3,9 @@
 namespace App\Orchid\Screens\Work;
 
 use App\Enums\WorkType;
-use App\Events\WorkAttachmentsChanged;
 use App\Models\Work;
 use App\Orchid\Layouts\Work\WorkEditLayout;
+use App\Services\WorkService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
@@ -15,6 +15,10 @@ use Orchid\Support\Facades\Toast;
 class WorkEditScreen extends Screen
 {
     public $work;
+
+    public function __construct(
+        private WorkService $workService
+    ){}
 
     /**
      * Fetch data to be displayed on the screen.
@@ -94,13 +98,7 @@ class WorkEditScreen extends Screen
 
     public function create(Request $request): RedirectResponse
     {
-        [$newWorkData, $attachmentsIds] = $this->extractWorkInfoFromRequest($request);
-
-        $this->saveWork($newWorkData);
-
-        $this->work->attachment()->syncWithoutDetaching($attachmentsIds);
-
-        WorkAttachmentsChanged::dispatch($attachmentsIds, $newWorkData['type']);
+       $this->work = $this->workService->createNewWork($request);
 
         Toast::success(__('Work was added'));
 
@@ -109,41 +107,10 @@ class WorkEditScreen extends Screen
 
     public function update(Request $request): RedirectResponse
     {
-        [$newWorkData, $attachmentsIds] = $this->extractWorkInfoFromRequest($request);
-
-        $this->saveWork($newWorkData);
-
-        if($this->checkIfAttachmentsChanged($attachmentsIds))
-        {
-            $this->work->attachment()->syncWithoutDetaching($attachmentsIds);
-
-            WorkAttachmentsChanged::dispatch($attachmentsIds, $newWorkData['type']);
-        }
+        $this->work = $this->workService->updateWork($request, $this->work);
 
         Toast::success(__('Work was updated'));
 
         return to_route("platform.systems.works");
-    }
-
-    private function extractWorkInfoFromRequest(Request $request): array
-    {
-        $newWorkData = $request->get('work');
-
-        unset($newWorkData['attachment']);
-
-        return [
-            $newWorkData,
-            $request->input('work.attachment')
-        ];
-    }
-
-    private function saveWork(array $data): void
-    {
-        $this->work->fill($data)->save();
-    }
-
-    private function checkIfAttachmentsChanged(array $attachmentsIds): bool
-    {
-        return $attachmentsIds != $this->work->attachment->pluck('id')->toArray();
     }
 }
