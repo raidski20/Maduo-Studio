@@ -1,7 +1,7 @@
 @extends('layouts.global')
 
 @section('page_title')
-    <title>Our Works | Maduo Studio</title>
+    <title>Our Work | Maduo Studio</title>
 @endsection
 
 @section('css')
@@ -19,65 +19,52 @@
             </p>
         </div>
 
-        <div class="works-section d-flex flex-column justify-content-center gap-5">
-            <div class="work d-flex flex-column justify-content-center gap-5">
+        <div class="works-section container d-flex flex-column justify-content-center">
 
-                <div class="image m-auto">
-                    <img
-                        class="img-fluid"
-                        src="{{ asset('assets/images/works/1.webp') }}"
-                    >
+            @forelse($works as $work)
+
+                @switch($work->type)
+                    @case(\App\Enums\WorkType::ANDROID_APP->value)
+                            <div class="work d-flex flex-column flex-md-row justify-content-center gap-5">
+                        @break
+
+                    @default
+                        <div class="work d-flex flex-column justify-content-center gap-5">
+                @endswitch
+
+                    <div class="image d-flex justify-content-center">
+                        <img class="img-fluid img-thumbnail"
+                            src="{{ asset($work->attachment[0]->relativeUrl) }}"
+                        >
+                    </div>
+
+                    @switch($work->type)
+                        @case(\App\Enums\WorkType::ANDROID_APP->value)
+                            <div class="info w-100 w-md-50">
+                        @break
+
+                        @default
+                            <div class="info ms-md-5">
+                    @endswitch
+
+                        <h2 class="title mb-4">{{ $loop->iteration . '. ' . $work->title }}</h2>
+
+                        <p class="description">
+                            {{$work->description }}
+                        </p>
+
+                        @if($work->url)
+                            <a href="{{ $work->url }}" class="link">Visit Website</a>
+                        @endif
+                    </div>
                 </div>
-
-                <div class="info">
-                    <h2 class="title mb-4">1. Maduo Studio</h2>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet. Ab optio nihil vel amet explicabo non aliquid alias aut molestias impedit ad architecto architecto. Sit nulla perferendis aut rerum corporis et minima debitis? Qui laboriosam consequatur eum totam dolores aut excepturi blanditiis et consequatur minus ut expedita expedita. At iste rerum 33 dolore accusantium qui perferendis asperiores rem consectetur repellendus.
-                    </p>
-
-                    <a href="#" class="link">Visit Website</a>
-                </div>
-            </div>
-
-            <div class="work d-flex flex-column justify-content-center gap-5">
-
-                <div class="image m-auto">
-                    <img
-                        class="img-fluid"
-                        src="{{ asset('assets/images/works/2.webp') }}"
-                    >
-                </div>
-
-                <div class="info">
-                    <h2 class="title mb-4">2. Eden-Hub</h2>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet. Ab optio nihil vel amet explicabo non aliquid alias aut molestias impedit ad architecto architecto. Sit nulla perferendis aut rerum corporis et minima debitis? Qui laboriosam consequatur eum totam dolores aut excepturi blanditiis et consequatur minus ut expedita expedita. At iste rerum 33 dolore accusantium qui perferendis asperiores rem consectetur repellendus.
-                    </p>
-
-                    <a href="#" class="link">Visit Website</a>
-                </div>
-            </div>
-
-            <div class="work d-flex flex-column justify-content-center gap-5">
-
-                <div class="image m-auto">
-                    <img
-                        class="img-fluid"
-                        src="{{ asset('assets/images/works/1.webp') }}"
-                    >
-                </div>
-
-                <div class="info">
-                    <h2 class="title mb-4">3. Mooc Project</h2>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet. Ab optio nihil vel amet explicabo non aliquid alias aut molestias impedit ad architecto architecto. Sit nulla perferendis aut rerum corporis et minima debitis? Qui laboriosam consequatur eum totam dolores aut excepturi blanditiis et consequatur minus ut expedita expedita. At iste rerum 33 dolore accusantium qui perferendis asperiores rem consectetur repellendus.
-                    </p>
-
-                    <a href="#" class="link">Visit Website</a>
-                </div>
-            </div>
+            @empty
+                <h1 class="text-center">
+                    Whoopsie-doodle! No works in sight, looks like they are hiding like pros.
+                    Give it another shot later 🕵️‍♂️😅
+                </h1>
+            @endforelse
         </div>
-
     </div>
 @endsection
 
