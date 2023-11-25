@@ -27,6 +27,10 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('global.work') }}">Our Work</a>
+                </li>
+
+                <li class="nav-item contact">
                     <a class="btn btn-dark-2"
                        href="{{ route('global.contact') }}"
                     >

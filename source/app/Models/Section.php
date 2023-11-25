@@ -20,6 +20,7 @@ class Section extends Model
         'about-us' => \App\Orchid\Layouts\Section\SectionEditPartials\AboutUsLayout::class,
         'services' => \App\Orchid\Layouts\Section\SectionEditPartials\ServicesLayout::class,
         'contact-us' => \App\Orchid\Layouts\Section\SectionEditPartials\ContactUsLayout::class,
+        'work' => '',
     ];
 
     protected $fillable = [

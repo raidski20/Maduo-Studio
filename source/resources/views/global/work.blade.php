@@ -12,11 +12,9 @@
     <div class="work-page common-page section-padding overflow-hidden" id="services-page">
 
         <div class="heading-section d-flex flex-column justify-content-center align-items-center">
-            <h6 class="section-title">Our Work</h6>
+            <h6 class="section-title">{{ $workSectionData->title }}</h6>
 
-            <p class="text-center">
-                Lorem ipsum dolor sit amet consectetur. Sapien nisl lobortis odio semper tellus id sed vitae. At mauris dui nam nibh viverra. Lacus pulvinar fringilla amet auctor tortor eget venenatis
-            </p>
+            <p class="text-center">{{ $workSectionData->description }}</p>
         </div>
 
         <div class="works-section container d-flex flex-column justify-content-center">

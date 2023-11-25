@@ -104,62 +104,6 @@
 
     </div>
   </div>
-
-  <div class="recent-work section-padding">
-      <div class="heading mb-4 d-flex flex-column flex-sm-row justify-content-between g-0">
-        <h6 class="section-title">Our Work</h6>
-
-        <div>
-          <a class="btn btn-white">see more</a>
-        </div>
-      </div>
-
-    <div class="row justify-content-between row-gap-3">
-        <div class="col-sm-6">
-          <img src="{{ asset('assets/images/work-samples/sample-1.png') }}" class="img-fluid img-thumbnail" alt="work-sample-1">
-        </div>
-
-        <div class="col-sm-6">
-          <img src="{{ asset('assets/images/work-samples/sample-2.png') }}" class="img-fluid img-thumbnail" alt="work-sample-2">
-        </div>
-
-        <div class="col-sm-6">
-          <img src="{{ asset('assets/images/work-samples/sample-3.png') }}" class="img-fluid img-thumbnail" alt="work-sample-3">
-        </div>
-
-        <div class="col-sm-6">
-          <img src="{{ asset('assets/images/work-samples/sample-4.png') }}" class="img-fluid img-thumbnail" alt="work-sample-4">
-        </div>
-    </div>
-  </div>
-
-  <div class="testimonial section-padding">
-    <h6 class="section-title">Testimonial!</h6>
-
-    <div class="reviews">
-
-      <div class="quote-symbol">
-        <svg xmlns="http://www.w3.org/2000/svg" width="107" height="85" viewBox="0 0 107 85" fill="none">
-          <path d="M51.3739 60.1946C51.3739 45.9728 42.0935 37.3735 30.1615 37.3735C26.5156 37.3735 23.5326 38.035 20.881 39.0272C20.881 27.4514 30.8244 18.5214 45.0765 15.8755V0C18.5609 3.30741 0 24.8055 0 52.5876C0 72.4319 11.2691 85 26.847 85C41.4306 85 51.3739 74.7471 51.3739 60.1946ZM107 60.1946C107 45.9728 97.3881 37.3735 85.4561 37.3735C81.8102 37.3735 78.8272 38.035 76.1756 39.358C76.1756 27.4514 86.4504 18.5214 100.703 15.8755V0C74.187 3.30741 55.6261 24.8055 55.6261 52.5876C55.6261 72.4319 66.8952 85 82.4731 85C97.0567 85 107 74.7471 107 60.1946Z" fill="#F4F4F4"/>
-        </svg>
-      </div>
-
-      <div class="review row gx-lg-3 justify-content-lg-between align-items-lg-end">
-        <div class="col-lg-7">
-          <p class="review-text">
-            Lorem ipsum dolor sit amet consectetur. Fusce nisi bibendum nisl turpis sit elementum. Massa tincidunt sed et quis sit blandit turpis pellentesque. Facilisi.
-          </p>
-        </div>
-
-        <div class="col-lg-2">
-          <div class="reviewer-info text-start text-sm-end">
-            <p>Raid</p>
-            <p>CEO of Mooc</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 @endsection
 
 @section('js')

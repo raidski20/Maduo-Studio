@@ -71,6 +71,11 @@ class SectionSeeder extends Seeder
                     ],
                 ]
             ],
+            [
+                'name' => 'work',
+                'title' => 'Our works',
+                'description' => 'Lorem ipsum dolor sit amet. Non magnam laborum cum fuga magnam hic pariatur consequuntur qui asperiores galisum.',
+            ]
         ];
 
         foreach ($sections as $section) {
