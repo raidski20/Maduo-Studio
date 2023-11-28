@@ -1,25 +1,50 @@
-FROM richarvey/nginx-php-fpm:3.1.6
+FROM php:8.1-fpm
 
-COPY ../source .
-COPY ../scripts ./scripts
-COPY ../conf ./conf
+RUN apt-get update && \
+    apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
+        libonig-dev \
+        libzip-dev \
+        zip \
+        unzip \
+        vim \
+        git \
+        nginx \
+        supervisor \
+        nodejs  \
+        npm
 
-# Image config
-ENV SKIP_COMPOSER 1
-ENV WEBROOT /var/www/html/public
-ENV PHP_ERRORS_STDERR 1
-ENV RUN_SCRIPTS 1
-ENV REAL_IP_HEADER 1
+RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath zip gd
 
-# Laravel config
-ENV APP_ENV production
-ENV APP_DEBUG false
-ENV LOG_CHANNEL stderr
+RUN apt clean && rm -rf /var/lib/apr/lists/*
 
-# Allow composer to run as root
-ENV COMPOSER_ALLOW_SUPERUSER 1
+# copy nginx config
+COPY ../docker/nginx/maduostudio.conf /etc/nginx/sites-available/maduostudio.conf
+RUN ln -s /etc/nginx/sites-available/maduostudio.conf /etc/nginx/sites-enabled/
 
-# install nodejs
-RUN apk add --update nodejs npm
+# copy supervisord configuration
+COPY ../docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-CMD ["/start.sh"]
+# install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# copy the application code
+COPY ../source /var/www/maduostudio
+
+# set the working directory
+WORKDIR /var/www/maduostudio
+
+RUN chown -R www-data:www-data /var/www/maduostudio
+
+# Install js dependencies
+RUN npm install
+
+# Build project js & frontend
+RUN npm run build
+
+EXPOSE 9000
+EXPOSE 8080
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
