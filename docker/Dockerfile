@@ -7,6 +7,7 @@ RUN apt-get update && \
         libpng-dev \
         libonig-dev \
         libzip-dev \
+        libwebp-dev \
         zip \
         unzip \
         vim \
@@ -15,6 +16,9 @@ RUN apt-get update && \
         supervisor \
         nodejs  \
         npm
+
+# configure PHP GD extension to run freetype + jpeg + webp
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
 
 RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath zip gd
 
