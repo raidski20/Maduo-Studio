@@ -1,7 +1,46 @@
+#
+# Build stage-1: Composer
+#
+FROM composer:2.4.3 AS composer
+
+WORKDIR /app
+
+COPY ../source .
+
+RUN composer install \
+    --no-dev \
+    --no-interaction \
+    --no-scripts \
+    --prefer-dist
+
+RUN composer dump-autoload -o
+
+#
+# Build stage-2: Composer
+#
+FROM node:21-alpine AS node
+
+WORKDIR /app
+
+# Copy package.json, package-lock.json, and vite.config.js
+COPY ../source/package.json ../source/package-lock.json ../source/vite.config.js ./
+
+# Copy JS and SCSS files
+COPY ../source/resources/js/ ./resources/js/
+COPY ../source/resources/sass/ ./resources/sass/
+
+RUN npm install
+RUN npm run build
+
+#
+# Build stage-3: Main app
+#
 FROM php:8.1-fpm
 
-RUN apt-get update && \
-    apt-get install -y \
+ARG env_decryption_key
+
+RUN apt update && \
+    apt install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
@@ -11,17 +50,15 @@ RUN apt-get update && \
         zip \
         unzip \
         vim \
-        git \
         nginx \
-        supervisor \
-        nodejs  \
-        npm
+        supervisor
 
 # configure PHP GD extension to run freetype + jpeg + webp
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
 
 RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath zip gd
 
+# clear apt cache
 RUN apt clean && rm -rf /var/lib/apr/lists/*
 
 # copy nginx config
@@ -31,9 +68,6 @@ RUN ln -s /etc/nginx/sites-available/maduostudio.conf /etc/nginx/sites-enabled/
 # copy supervisord configuration
 COPY ../docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# install composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
 # copy the application code
 COPY ../source /var/www/maduostudio
 
@@ -42,11 +76,22 @@ WORKDIR /var/www/maduostudio
 
 RUN chown -R www-data:www-data /var/www/maduostudio
 
-# Install js dependencies
-RUN npm install
+# copy vendor
+COPY --from=composer /app/vendor/ /var/www/maduostudio/vendor/
 
-# Build project js & frontend
-RUN npm run build
+# copy frontend build
+COPY --from=node /app/public/build/ /var/www/maduostudio/public/build/
+
+RUN php artisan package:discover
+
+# decrypt .env.prod file
+RUN php artisan env:decrypt --env=prod --key="$env_decryption_key"
+
+# rename .env.prod to .env
+RUN mv .env.prod .env
+
+# delete encrypted .env.prod file since no need for it anymore
+RUN rm .env.prod.encrypted
 
 EXPOSE 9000
 EXPOSE 8080

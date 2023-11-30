@@ -10,6 +10,8 @@ source/public/storage
 source/public/assets/uploads/*
 !source/public/assets/uploads
 source/tests
+source/bootstrap/cache/*
+!source/bootstrap/cache
 
 /storage/*.key
 source/.phpunit.result.cache
@@ -21,3 +23,4 @@ source/.editorconfig
 source/.gitattributes
 source/.gitignore
 source/phpunit.xml
+source/README.md
