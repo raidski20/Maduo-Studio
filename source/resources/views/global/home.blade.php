@@ -1,5 +1,11 @@
 @extends('layouts.global')
 
+@section('seo_meta_data')
+    <meta name="description" content="Crafting business solutions with tomorrow's technology, today." />
+    <meta name="og:title" property="og:title" content="Maduo Studio - Home" />
+    <meta name="og:description" property="og:description" content="Crafting business solutions with tomorrow's technology, today." />
+@endsection
+
 @section('page_title')
     <title>Home | Maduo Studio</title>
 @endsection

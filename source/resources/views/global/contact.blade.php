@@ -1,5 +1,11 @@
 @extends('layouts.global')
 
+@section('seo_meta_data')
+    <meta name="description" content="Reach out to kickstart you big ideas." />
+    <meta name="og:description" property="og:description" content="Reach out to kickstart you big ideas." />
+    <meta name="og:title" property="og:title" content="Maduo Studio - Let's Talk" />
+@endsection
+
 @section('page_title')
     <title>Contact us | Maduo Studio</title>
 @endsection
