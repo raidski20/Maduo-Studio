@@ -31,9 +31,20 @@
                 @endswitch
 
                     <div class="image d-flex justify-content-center">
-                        <img class="img-fluid img-thumbnail"
-                            src="{{ asset($work->attachment[0]->relativeUrl) }}"
-                        >
+
+                        <x-bootstrap-carousel.carousel :carouselId="'carousel-' . $loop->index">
+
+                            @foreach($work->attachment as $attachment)
+
+                                <x-bootstrap-carousel.carousel-img-item
+                                    :img-url="asset($attachment->relativeUrl)"
+                                    :is-active="$loop->index == 0"
+                                >
+                                </x-bootstrap-carousel.carousel-img-item>
+                            @endforeach
+
+                        </x-bootstrap-carousel.carousel>
+
                     </div>
 
                     @switch($work->type)

@@ -53,7 +53,6 @@ class WorkEditLayout extends Rows
             Upload::make('work.attachment')
                 ->acceptedFiles('image/*')
                 ->path("images/work-samples")
-                ->multiple(false)
                 ->help(
                     '<ul class="text-primary">
                         <li>The recommended dimensions for a mobile app screenshot are 576x713,
