@@ -17,7 +17,7 @@ RUN composer dump-autoload -o
 
 #
 # Build stage-2: Composer
-#
+#docker
 FROM node:21-alpine AS node
 
 WORKDIR /app
@@ -35,16 +35,16 @@ RUN npm run build
 #
 # Build stage-3: Main app
 #
-FROM php:8.1-fpm
+FROM php:8.1-fpm-alpine
 
 ARG env_decryption_key
 
-RUN apt update && \
-    apt install -y \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
+RUN apk update && \
+    apk add --no-cache \
+        freetype-dev \
+        jpeg-dev \
         libpng-dev \
-        libonig-dev \
+        oniguruma-dev \
         libzip-dev \
         libwebp-dev \
         zip \
@@ -53,17 +53,17 @@ RUN apt update && \
         nginx \
         supervisor
 
+
 # configure PHP GD extension to run freetype + jpeg + webp
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
 
 RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath zip gd
 
-# clear apt cache
-RUN apt clean && rm -rf /var/lib/apr/lists/*
+# clear apk cache
+RUN rm -rf /var/cache/apk/*
 
 # copy nginx config
-COPY ../docker/nginx/maduostudio.conf /etc/nginx/sites-available/maduostudio.conf
-RUN ln -s /etc/nginx/sites-available/maduostudio.conf /etc/nginx/sites-enabled/
+COPY ../docker/nginx/maduostudio.conf /etc/nginx/http.d/maduostudio.conf
 
 # copy supervisord configuration
 COPY ../docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
