@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Events\WorkAttachmentsChanged;
 use App\Models\Work;
+use Illuminate\Support\Facades\DB;
 
 class WorkService
 {
@@ -40,6 +41,28 @@ class WorkService
         }
 
         return $this->work;
+    }
+
+    public function deleteWork(Work $work): bool
+    {
+        try {
+            DB::beginTransaction();
+
+            // Delete work attachments
+            $work->attachment->each->delete();
+
+            $work->delete();
+
+            DB::commit();
+
+            return true;
+
+        } catch (\Exception) {
+
+            DB::rollBack();
+
+            return false;
+        }
     }
 
     private function extractWorkInfoFromRequest(array $validatedData): array

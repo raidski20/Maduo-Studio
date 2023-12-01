@@ -6,6 +6,7 @@ use App\Enums\WorkType;
 use App\Models\Work;
 use App\Orchid\Layouts\Work\WorkListLayout;
 use App\Orchid\Selections\WorkTypeSelection;
+use App\Services\WorkService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -13,9 +14,14 @@ use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
 class WorkListScreen extends Screen
 {
+    public function __construct(
+        private WorkService $workService
+    ){}
+
     /**
      * Fetch data to be displayed on the screen.
      *
@@ -94,8 +100,21 @@ class WorkListScreen extends Screen
         ]);
 
         $addNewWorkLink = route('platform.systems.works.create') . '?type=' . $validated['type'];
+
         return redirect()->to($addNewWorkLink);
-        /*$t = $request['work']['attachment'];
-        $this->work->attachment->pluck('id')->toArray());*/
+    }
+
+    /** Delete a work  with its attachment(s) */
+    public function remove(Request $request)
+    {
+        $work = Work::findOrFail($request->get('id'));
+
+        $isDeleted = $this->workService->deleteWork($work);
+
+        if(! $isDeleted) {
+            Toast::error(__('Failed to delete work'));
+        }
+
+        Toast::success(__('Work was deleted'));
     }
 }

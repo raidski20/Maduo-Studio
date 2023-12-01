@@ -4,6 +4,7 @@ namespace App\Orchid\Layouts\Work;
 
 use App\Enums\WorkType;
 use App\Models\Work;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Input;
@@ -58,6 +59,13 @@ class WorkListLayout extends Table
                         Link::make(__('Edit'))
                             ->route('platform.systems.works.edit', $work->id)
                             ->icon('bs.pencil'),
+
+                        Button::make(__('Delete'))
+                            ->icon('bs.trash3')
+                            ->confirm(__('You can\'t revert this action. Are you sure you want to continue ?'))
+                            ->method('remove', [
+                                'id' => $work->id,
+                            ]),
                     ])),
         ];
     }
