@@ -51,6 +51,7 @@ class WorkEditLayout extends Rows
                 ->maxlength(250),
 
             Upload::make('work.attachment')
+                ->title('Work images/screenshots')
                 ->acceptedFiles('image/*')
                 ->path("images/work-samples")
                 ->help(
