@@ -5,7 +5,7 @@ FROM composer:2.4.3 AS composer
 
 WORKDIR /app
 
-COPY ../source .
+COPY source .
 
 RUN composer install \
     --no-dev \
@@ -23,11 +23,11 @@ FROM node:21-alpine AS node
 WORKDIR /app
 
 # Copy package.json, package-lock.json, and vite.config.js
-COPY ../source/package.json ../source/package-lock.json ../source/vite.config.js ./
+COPY source/package.json source/package-lock.json source/vite.config.js ./
 
 # Copy JS and SCSS files
-COPY ../source/resources/js/ ./resources/js/
-COPY ../source/resources/sass/ ./resources/sass/
+COPY source/resources/js/ ./resources/js/
+COPY source/resources/sass/ ./resources/sass/
 
 RUN npm install
 RUN npm run build
@@ -47,6 +47,7 @@ RUN apk update && \
         oniguruma-dev \
         libzip-dev \
         libwebp-dev \
+        libpq-dev \
         zip \
         unzip \
         vim \
@@ -54,22 +55,24 @@ RUN apk update && \
         supervisor
 
 
-# configure PHP GD extension to run freetype + jpeg + webp
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
+# configure pgsql and PHP GD extension to run freetype + jpeg + webp
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
 
-RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath zip gd
+RUN docker-php-ext-install pdo pgsql pdo_pgsql mbstring exif pcntl bcmath zip gd
+
 
 # clear apk cache
 RUN rm -rf /var/cache/apk/*
 
 # copy nginx config
-COPY ../docker/nginx/maduostudio.conf /etc/nginx/http.d/maduostudio.conf
+COPY docker/nginx/maduostudio.conf /etc/nginx/http.d/maduostudio.conf
 
 # copy supervisord configuration
-COPY ../docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # copy the application code
-COPY ../source /var/www/maduostudio
+COPY source/ /var/www/maduostudio
 
 # set the working directory
 WORKDIR /var/www/maduostudio
@@ -94,6 +97,6 @@ RUN mv .env.prod .env
 RUN rm .env.prod.encrypted
 
 EXPOSE 9000
-EXPOSE 8080
+EXPOSE 80
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
