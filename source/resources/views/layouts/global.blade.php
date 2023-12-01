@@ -11,6 +11,7 @@
     <meta name="author" content="Developed by Boulahdid Raid" />
     <meta name="og:type" property="og:type" content="website" />
     <meta name="og:site_name" content="Maduo Studio" />
+    <meta name="og:image" property="og:image" content="{{ asset('assets/images/maduostudio-cover.png') }}" />
 
     @yield('seo_meta_data')
 

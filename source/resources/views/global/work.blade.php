@@ -41,9 +41,8 @@
                         <x-bootstrap-carousel.carousel :carouselId="'carousel-' . $loop->index">
 
                             @foreach($work->attachment as $attachment)
-
                                 <x-bootstrap-carousel.carousel-img-item
-                                    :img-url="asset($attachment->relativeUrl)"
+                                    :img-url="$attachment->url"
                                     :is-active="$loop->index == 0"
                                 >
                                 </x-bootstrap-carousel.carousel-img-item>
