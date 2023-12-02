@@ -1,7 +1,7 @@
 #
 # Build stage-1: Composer
 #
-FROM composer:2.4.3 AS composer
+FROM composer:2.6.3 AS composer
 
 WORKDIR /app
 
