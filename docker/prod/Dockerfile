@@ -35,7 +35,7 @@ RUN npm run build
 #
 # Build stage-3: Main app
 #
-FROM php:8.1-fpm-alpine
+FROM php:8.2-fpm-alpine
 
 ARG env_decryption_key
 
