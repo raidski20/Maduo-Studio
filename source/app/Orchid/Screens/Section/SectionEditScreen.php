@@ -3,9 +3,9 @@
 namespace App\Orchid\Screens\Section;
 
 use App\Enums\SectionType;
+use App\Http\Requests\SectionRequest;
 use App\Models\Section;
 use App\Orchid\Layouts\Section\SectionEditPartials\CommonLayout;
-use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
@@ -75,7 +75,7 @@ class SectionEditScreen extends Screen
         ];
     }
 
-    public function save(Request $request, Section $section)
+    public function save(SectionRequest $request, Section $section)
     {
         $section->fill($request->input('section'))->save();
 
