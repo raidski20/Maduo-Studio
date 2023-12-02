@@ -66,10 +66,10 @@ RUN docker-php-ext-install pdo pgsql pdo_pgsql mbstring exif pcntl bcmath zip gd
 RUN rm -rf /var/cache/apk/*
 
 # copy nginx config
-COPY docker/nginx/maduostudio.conf /etc/nginx/http.d/maduostudio.conf
+COPY docker/prod/nginx/maduostudio.conf /etc/nginx/http.d/maduostudio.conf
 
 # copy supervisord configuration
-COPY docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY docker/prod/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # copy the application code
 COPY source/ /var/www/maduostudio
