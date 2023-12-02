@@ -1,0 +1,59 @@
+version: "3.8"
+
+networks:
+  maduostudio_net:
+    name: maduostudio_net
+    driver: bridge
+volumes:
+  maduostudio_db:
+  maduostudio-uploads:
+    
+    
+services:
+  app:
+    image: "maduostudio-dev"
+    
+    build:
+      args:
+        user: ${USER}
+        uid:  1000
+      context: ./
+      dockerfile: Dockerfile
+      
+    container_name: "maduostudio-dev-app"
+    restart: always
+    working_dir: /app
+    volumes:
+      - '../../source:/app'
+      - 'maduostudio-uploads:/app/public/uploads'
+    networks:
+      - maduostudio_net
+
+  nginx:
+    image: nginx
+    container_name: "maduostudio-dev-nginx"
+    restart: always
+    ports:
+      - "9001:80"
+    working_dir: /app
+    volumes:
+      - '../../source:/app'
+      - ./maduostudio.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - maduostudio_net
+
+  database:
+    image: mysql
+    container_name: "maduostudio-dev-mysql"
+    restart: always
+    ports:
+      - '3307:3306'
+    volumes:
+      - 'maduostudio_db:/var/lib/mysql'
+    networks:
+      - maduostudio_net
+    environment:
+      MYSQL_ROOT_PASSWORD: rootuser
+      MYSQL_DATABASE: maduostudio
+      MYSQL_USER: maduostudio
+      MYSQL_PASSWORD: rootuser
