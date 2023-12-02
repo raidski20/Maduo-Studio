@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\Section;
 
+use App\Enums\SectionType;
 use App\Models\Section;
 use App\Orchid\Layouts\Section\SectionEditPartials\CommonLayout;
 use Illuminate\Http\Request;
@@ -64,12 +65,13 @@ class SectionEditScreen extends Screen
      */
     public function layout(): iterable
     {
-        if(empty(Section::SECTIONS_MAP[$this->section->name]))
+        if(empty(SectionType::tryFrom($this->section->name)->layout())) {
             return [CommonLayout::class];
+        }
 
         return [
             CommonLayout::class,
-            Section::SECTIONS_MAP[$this->section->name]
+            SectionType::tryFrom($this->section->name)->layout()
         ];
     }
 

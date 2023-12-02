@@ -14,15 +14,6 @@ class Section extends Model
 {
     use HasFactory, HasUuids, AsSource, Filterable;
 
-    public const SECTIONS_MAP = [
-        'hero' => '',
-        'statistics' => \App\Orchid\Layouts\Section\SectionEditPartials\StatisticsLayout::class,
-        'about-us' => \App\Orchid\Layouts\Section\SectionEditPartials\AboutUsLayout::class,
-        'services' => \App\Orchid\Layouts\Section\SectionEditPartials\ServicesLayout::class,
-        'contact-us' => \App\Orchid\Layouts\Section\SectionEditPartials\ContactUsLayout::class,
-        'work' => '',
-    ];
-
     protected $fillable = [
         'name',
         'title',
